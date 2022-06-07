@@ -18,8 +18,10 @@ app.use(
 )
 
 mongoose.connect(process.env.DB)
+
 app.post('/create', (req, res) =>{
     let JSONData = req.body;
+
 
     cryptr = new Cryptr(process.env.DEEP_KEY)
     let fName = cryptr.encrypt(JSONData['fName'])

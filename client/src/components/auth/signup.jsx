@@ -1,7 +1,37 @@
-import React from 'react'
+import React,{useState} from 'react'
+import axios from 'axios';
 import image from '.././image'
 
-const signup = () => {
+const Signup = () => {
+  
+    const [fName, setfName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [cPassword, setCPassword] = useState('');
+    
+
+        const SignUpUser = async(e) => {
+            e.preventDefault();
+            console.log(fName,email,password,cPassword);
+            try {
+                const response = await axios.post('http://localhost:8080/create',JSON.stringify({fName,email,password,cPassword}),
+                    {
+                        headers: {'Content-Type': 'application/json'},
+                        withCredentials: true
+                    }
+                );
+
+            } catch (error) {
+                if (error) {
+                    console.log('error');
+                }
+            }
+
+            
+        }
+
+
+    
 
   return (
     <section className="signup">
@@ -9,22 +39,22 @@ const signup = () => {
                 <div className="signup-content">
                     <div className="signup-form">
                         <h2 className="form-title">Sign Up</h2>
-                        <form method="POST" className="register-form" id="register-form">
+                        <form method="POST" className="register-form" id="register-form" onSubmit={SignUpUser} >
                             <div className="form-group">
                                 <label htmlFor="name"><i className="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="name" placeholder="Your Name"/>
+                                <input type="text" name="fname" id="fname" placeholder="Your Full Name" onChange={(e)=>{setfName(e.target.value)}} value={fName}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="email"><i className="zmdi zmdi-email"></i></label>
-                                <input type="email" name="email" id="email" placeholder="Your Email"/>
+                                <input type="email" name="email" id="email" placeholder="Your Email" onChange={(e) => {setEmail(e.target.value)}} value={email}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="pass"><i className="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="pass" id="pass" placeholder="Password"/>
+                                <input type="password" name="pass" id="pass" placeholder="Password" onChange={(e) => {setPassword(e.target.value)}} value={password}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="re-pass"><i className="zmdi zmdi-lock-outline"></i></label>
-                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" onChange={(e) => {setCPassword(e.target.value)}} value={cPassword}/>
                             </div>
                             <div className="form-group">
                                 <input type="checkbox" name="agree-term" id="agree-term" className="agree-term" />
@@ -45,4 +75,4 @@ const signup = () => {
  )
 }
 
-export default signup
+export default Signup
