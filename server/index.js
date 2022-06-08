@@ -18,7 +18,6 @@ app.use(
 )
 
 mongoose.connect(process.env.DB)
-
 app.post('/create', (req, res) =>{
     let JSONData = req.body;
 
@@ -26,6 +25,8 @@ app.post('/create', (req, res) =>{
     let fName = cryptr.encrypt(JSONData['fName'])
 
     if(JSONData['password'] != JSONData['cPassword']){
+        res.end("Password Doesn't match")
+    }else{
         bcrypt.hash(JSONData['password'], 10, (err, hash) =>{
             if(err){
                 res.end(err)
@@ -51,32 +52,6 @@ app.post('/create', (req, res) =>{
         })
     }
 })
-
-app.post('/login', async (req, res)=>{
-    let JSONData = req.body
-    let email = JSONData.email;
-    let rPassword = JSONData.password;
-
-    let user = await User.findOne({email: email})
-    if(user){
-        let pass = user.password;
-        let status = user.status;
-        let auth = await bcrypt.compare(rPassword, pass);
-        if(auth == true){
-            if(status === 0){
-                console.log("Not Authorized")
-            }else{
-                console.log("logged in")
-            }
-        }else{
-            console.log("Wrong pass")
-        }
-    } else{
-        console.log("User not found")
-    }
-})
-
-let port = process.env.PORT || 6969
-app.listen(port, ()=>{
+app.listen(8080, ()=>{
     console.log("Listening......")
 })
