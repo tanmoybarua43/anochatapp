@@ -37,7 +37,6 @@ app.post('/create', (req, res) =>{
                     email: JSONData['email'],
                     password : securePass,
                 })
-    
                 finalUserDetails.save()
                 .then(result =>{
                     res.json(result)
@@ -59,12 +58,16 @@ app.post('/login', async (req, res)=>{
     if(user){
         let pass = user.password;
         let status = user.status;
+        let personType = user.personType;
+        sessionStorage.setItem('personType', personType)
+        // console.log(status);
         let auth = await bcrypt.compare(rPassword, pass);
         if(auth == true){
             if(status === 0){
                 console.log("Not Authorized")
+                sessionStorage.setItem('personType');
             }else{
-                console.log("logged in")
+                res.send("logged in")
             }
         }else{
             console.log("Wrong pass")
