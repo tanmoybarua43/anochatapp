@@ -23,7 +23,7 @@ const Signup = () => {
 
             } catch (error) {
                 if (error) {
-                    console.log('error');
+                    console.log(error);
                 }
             }
         }
@@ -34,10 +34,10 @@ const Signup = () => {
                 <div className="signup-content">
                     <div className="signup-form">
                         <h2 className="form-title">Sign Up</h2>
-                        <form method="POST" className="register-form" id="register-form">
+                        <form  className="register-form" id="register-form" onSubmit={SignUpUser}>
                             <div className="form-group">
                                 <label htmlFor="name"><i className="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="name" placeholder="Your Name" onChange={(e)=>{setfName(e.target.value)}} value={fName}/>
+                                <input type="text" name="fname" id="name" placeholder="Your Name" onChange={(e)=>{setfName(e.target.value)}} value={fName}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="email"><i className="zmdi zmdi-email"></i></label>
@@ -45,11 +45,11 @@ const Signup = () => {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="pass"><i className="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="pass" id="pass" placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}} value={password}/>
+                                <input type="password" name="password" id="pass" placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}} value={password}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="re-pass"><i className="zmdi zmdi-lock-outline"></i></label>
-                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" onChange={(e)=>{setCPassword(e.target.value)}} value={cPassword} />
+                                <input type="password" name="cPassword" id="re_pass" placeholder="Repeat your password" onChange={(e)=>{setCPassword(e.target.value)}} value={cPassword} />
                             </div>
                             <div className="form-group">
                                 <input type="checkbox" name="agree-term" id="agree-term" className="agree-term" />
