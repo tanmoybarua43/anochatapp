@@ -59,13 +59,10 @@ app.post('/login', async (req, res)=>{
         let pass = user.password;
         let status = user.status;
         let personType = user.personType;
-        sessionStorage.setItem('personType', personType)
-        // console.log(status);
         let auth = await bcrypt.compare(rPassword, pass);
         if(auth == true){
             if(status === 0){
                 console.log("Not Authorized")
-                sessionStorage.setItem('personType');
             }else{
                 res.send("logged in")
             }
