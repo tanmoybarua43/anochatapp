@@ -2,8 +2,12 @@ let mongoose = require('mongoose')
 let Schema = mongoose.Schema;
 
 let greekMSchema = new Schema({
-    greek:{
+    message:{
         type: String,
+        required: true
+    },
+    greekName:{
+        type:String,
         required: true
     },
     greekId:{
