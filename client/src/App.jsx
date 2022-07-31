@@ -13,9 +13,9 @@ const App = () => {
   return (
     <BrowserRouter>
      <Routes>
-      <Route path="/" element={<ChatComponent />}/>
-      <Route path="/Signup" element={<Sigup />}/>
-      <Route path="/Signin" element={<Sigin />}/>
+      <Route path="/chat" element={<ChatComponent />}/>
+      <Route path="/signup" element={<Sigup />}/>
+      <Route path="/signin" element={<Sigin />}/>
      </Routes>
     </BrowserRouter>
     // <ChatComponent />
