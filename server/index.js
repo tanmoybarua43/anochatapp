@@ -78,6 +78,16 @@ app.post('/login', async (req, res)=>{
     }
 })
 
+app.post('/allUser', async(req, res)=>{
+    let cryptr = new Cryptr(process.env.DEEP_KEY);
+    let users = await User.find()
+    for(let i=0; i < users.length; i++){
+        console.log(users[i])
+        // console.log(cryptr.decrypt(users[i]['fName']))
+        // console.log(users[i]['email'])
+        // console.log(users[i]['status'])
+    }
+})
 app.post('/send', async (req, res)=>{
     let Greek = require('./greekMSchema')
 
@@ -112,11 +122,14 @@ app.post('/chat', async (req, res)=>{
     if(greeks){
         greeks.forEach((greek) =>{
             let cryptr = new Cryptr(process.env.DEEP_KEY);
-            
-            if(greek['greekId'] === cryptr.decrypt(id)){
-                console.log(cryptr.decrypt(greek['message']))
+
+            if(greek['greekId'] !== cryptr.decrypt(id)){
+                let msg = cryptr.decrypt(greek['message']);
+                let gName = cryptr.decrypt(greek['greekName']);
+                console.log(gName+ ' ~ ' +msg)
             }else{
-                console.log("2nd person")
+                let msg = cryptr.decrypt(greek['message']);
+                console.log(msg)
             }
         })
     } else{
