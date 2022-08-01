@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import {useNavigate, Link} from 'react-router-dom'
 import '../../vendor/css/auth.css'
 import image from '.././image'
 import axios from 'axios'
@@ -6,10 +7,13 @@ import axios from 'axios'
 const Signin = () => {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const [isLogin,setIsLogin] = useState(false);
+    const nav = useNavigate();
+    // const [message,setMessage] = useState('');
 
     const SignInUser = async(e) => {
         e.preventDefault();
-        console.log(email, password);
+        // console.log(email, password);
         try{
             const response = await axios.post('http://localhost:8080/login',JSON.
             stringify({email,password}),
@@ -19,8 +23,13 @@ const Signin = () => {
             }
             );
 
-            console.log(response.data)
+            // const result = response.data;
+            setIsLogin(true);
+            nav('/chat');
 
+            
+
+        
         } catch(error){
             if(error){
                 console.log(error);
@@ -36,11 +45,20 @@ const Signin = () => {
                 <div className="signin-content">
                     <div className="signin-image">
                         <figure><img src={image.signin} alt="singup"/></figure>
-                        <a href="/signup" className="signup-image-link">Create an account</a>
+                        <Link to="/signup" className="signup-image-link">Create an account</Link>
                     </div>
 
                     <div className="signin-form">
                         <h2 className="form-title">Sign In</h2>
+                        {
+                            isLogin && 
+                            <div className="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Success!</strong> You are logged in.
+                            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                        }
                         <form className="register-form" id="login-form" onSubmit={SignInUser}>
                             <div className="form-group">
                                 <label htmlFor="your_name"><i className="zmdi zmdi-account material-icons-name"></i></label>

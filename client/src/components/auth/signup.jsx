@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { Link } from 'react-router-dom'
 import image from '.././image'
 import axios from 'axios'
 
@@ -8,6 +9,7 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [cPassword, setCPassword] = useState('');
+    const [isSignup,setIsSignUp] = useState(false);
 
 
         const SignUpUser = async(e) => {
@@ -20,6 +22,9 @@ const Signup = () => {
                         withCredentials: true
                     }
                 );
+                
+                setIsSignUp(true);
+
 
             } catch (error) {
                 if (error) {
@@ -34,6 +39,14 @@ const Signup = () => {
                 <div className="signup-content">
                     <div className="signup-form">
                         <h2 className="form-title">Sign Up</h2>
+                        {
+                            isSignup && <div className="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Success!</strong> Your Account Created.<span className="text-danger">Wating for Authorization</span>
+                            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                        }
                         <form  className="register-form" id="register-form" onSubmit={SignUpUser}>
                             <div className="form-group">
                                 <label htmlFor="name"><i className="zmdi zmdi-account material-icons-name"></i></label>
@@ -62,7 +75,7 @@ const Signup = () => {
                     </div>
                     <div className="signup-image">
                         <figure><img src={image.signup} alt="sing up image"/></figure>
-                        <a href="/signin" className="signup-image-link">I am already member</a>
+                        <Link to="/signin" className="signup-image-link">I am already member</Link>
                     </div>
                 </div>
             </div>
