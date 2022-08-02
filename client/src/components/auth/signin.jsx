@@ -5,31 +5,32 @@ import image from '.././image'
 import axios from 'axios'
 
 const Signin = () => {
+    const navigation = useNavigate();
+    // const history = useHistory();
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [isLogin,setIsLogin] = useState(false);
-    const nav = useNavigate();
+
     // const [message,setMessage] = useState('');
 
     const SignInUser = async(e) => {
         e.preventDefault();
         // console.log(email, password);
         try{
-            const response = await axios.post('http://localhost:8080/login',JSON.
+            const response = await axios.post('https://anochatapp.herokuapp.com/login',JSON.
             stringify({email,password}),
             {
                 headers: {'Content-Type': 'application/json'},
                 withCredentials: true
             }
             );
-
-            // const result = response.data;
+            console.log(response.data.fName);
+            const result = response.data;
+            // let name = response;
             setIsLogin(true);
-            nav('/chat');
+            navigation('/chat', {state: result});
+            // history.push('/chat');
 
-            
-
-        
         } catch(error){
             if(error){
                 console.log(error);
