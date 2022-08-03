@@ -13,7 +13,7 @@ const cors = require('cors');
 
 app.use(
     cors({
-        origin: "http://localhost:3000",
+        origin: "http://localhost:3001",
         credentials: true
     })
 )
@@ -58,6 +58,7 @@ app.post('/login', async (req, res)=>{
 
     let user = await User.findOne({email: email})
     if(user){
+        let fName = user.fName;
         let pass = user.password;
         let status = user.status;
         let userId = user.id;
@@ -68,7 +69,8 @@ app.post('/login', async (req, res)=>{
             }else{
                 cryptr = new Cryptr(process.env.DEEP_KEY)
                 let id = cryptr.encrypt(userId)
-                res.send(id)
+                let fNameData = cryptr.decrypt(fName)
+                res.send({fNameData, status})
             }
         }else{
             console.log("Wrong pass")

@@ -2,6 +2,35 @@ body{
   background-color: #f4f7f6;
   margin-top:20px;
 }
+
+/* Home page */
+.hello-world {
+  text-align: center;
+}
+.hello-world a{
+  font-size: 30px;
+  font-weight: bolder;
+  background: linear-gradient(to right, rgb(202, 100, 100) 20%, rgb(185, 185, 82) 40%, rgb(0, 255, 110) 60%, rgb(227, 46, 46) 80%);
+  background-size: 200% auto;
+  
+  color: #000;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 1s linear infinite;
+
+}
+.hello-world a:hover{
+  text-decoration: none;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
 .card {
   background: #fff;
   transition: .5s;
@@ -233,6 +262,8 @@ body{
   }
 }
 
+
+
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .chat-app .chat-list {
       height: 650px;
@@ -254,3 +285,5 @@ body{
       overflow-x: auto
   }
 }
+
+
