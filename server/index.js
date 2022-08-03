@@ -21,7 +21,7 @@ app.use(
 mongoose.connect(process.env.DB)
 
 
-app.post('/', (req, res) =>{
+app.get('/', (req, res) =>{
     res.send("Welcome Home")
 })
 
