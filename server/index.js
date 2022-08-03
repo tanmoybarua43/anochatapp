@@ -20,6 +20,12 @@ app.use(
 
 mongoose.connect(process.env.DB)
 
+
+app.post('/', (req, res) =>{
+    res.send("Welcome Home")
+})
+
+
 app.post('/create', (req, res) =>{
     let JSONData = req.body;
 
