@@ -11,6 +11,8 @@ let Greek = require('./greekMSchema')
 const Cryptr = require("cryptr")
 const cors = require('cors');
 
+
+//cors issue 
 app.use(
     cors({
         origin: "http://localhost:3001",
