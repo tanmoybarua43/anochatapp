@@ -127,7 +127,7 @@ app.post('/chat', async (req, res)=>{
     }
 })
 
-let port = process.env.PORT || 80
+let port = process.env.PORT || 8000
 app.listen(port, ()=>{
     console.log("Listening......")
 })
